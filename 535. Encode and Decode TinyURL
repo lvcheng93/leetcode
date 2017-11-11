@@ -1,0 +1,26 @@
+535. Encode and Decode TinyURL
+
+class Solution {
+public:
+    vector<string> a;
+    // Encodes a URL to a shortened URL.
+    string encode(string longUrl) {
+        a.push_back(longUrl);
+        stringstream s;
+        s << a.size()-1;
+        return s.str();
+    }
+    
+    // Decodes a shortened URL to its original URL.
+    string decode(string shortUrl) {
+        stringstream ss;
+        ss << shortUrl;
+        int site;
+        ss >> site;
+        return a[site];
+    }
+};
+
+// Your Solution object will be instantiated and called as such:
+// Solution solution;
+// solution.decode(solution.encode(url));
