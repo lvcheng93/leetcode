@@ -1,0 +1,43 @@
+class Solution {
+public:
+    int countBattleships(vector<vector<char>>& board) {
+        int num = 0;
+        for(int i = 0;i < board.size();++i){            //行数
+            for(int j = 0;j < board[0].size();++j){     //列数
+                if(board[i][j] == 'X'){
+                    ++num;
+                    judge(board,i,j);
+                }
+            }
+        }
+        return num;
+    }
+    void judge(vector<vector<char>>& board,int i,int j){
+        int MAX_W = board[0].size()-1;
+        int MAX_H = board.size()-1;
+        int MIN_W = 0;
+        int MIN_H = 0;
+        board[i][j] = '.';
+        if(i+1 <= MAX_H){
+            if(board[i+1][j] == 'X'){
+                judge(board, i+1, j);
+            }
+        }
+        if(i-1 >= MIN_H){
+            if(board[i-1][j] == 'X'){
+                judge(board, i-1, j);
+            }
+        }
+        if(j+1 <= MAX_W){
+            if(board[i][j+1] == 'X'){
+                judge(board, i, j+1);
+            }
+        }
+        if(j-1 >= MIN_W){
+            if(board[i][j-1] == 'X'){
+                judge(board, i, j-1);
+            }
+        }
+    }
+};
+
