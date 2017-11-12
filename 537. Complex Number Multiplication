@@ -1,0 +1,31 @@
+class Solution {
+public:
+    string complexNumberMultiply(string a, string b) {
+        vector<int> tmp_a,tmp_b;
+        int a_1,a_2,b_1,b_2,tmp1,tmp2;
+        string result;
+        tmp_a = div(a);
+        tmp_b = div(b);
+        a_1 = tmp_a[0];
+        a_2 = tmp_a[1];
+        b_1 = tmp_b[0];
+        b_2 = tmp_b[1];
+        tmp1 = a_1*b_1 - a_2*b_2;
+        tmp2 = a_1*b_2 + a_2*b_1;
+        result = to_string(tmp1) + "+" + to_string(tmp2) + "i";
+        return result;
+    }
+    vector<int> div(string a){
+        vector<int> v;
+        int i;
+        char *strc = new char[strlen(a.c_str())+1];
+        strcpy(strc,a.c_str());
+        char *tmp = strtok(strc,"+i");
+        while(tmp != NULL){
+            i = atoi(tmp);
+            v.push_back(i);
+            tmp = strtok(NULL,"+i");
+        }
+        return v;
+    }
+};
