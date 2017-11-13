@@ -1,0 +1,16 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        string str = "";
+        char *strc = new char[strlen(s.c_str()) + 1];
+        strcpy(strc, s.c_str());
+        char *tmp = strtok(strc, " ");
+        while(tmp != NULL){
+            reverse(tmp, tmp+strlen(tmp));
+            str = str + tmp;
+            tmp = strtok(NULL, " ");
+            if(tmp != NULL) str = str + " ";
+        }
+        return str;
+    }
+};
