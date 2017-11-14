@@ -1,0 +1,30 @@
+class Solution {
+public:
+	vector<string> findWords(vector<string>& words) {
+		vector<string> result;
+		for (int i = 0; i < words.size(); ++i){
+			if (judge(words[i])) result.push_back(words[i]);
+		}
+		return result;
+	}
+	bool judge(string s){
+		char tmp = s[0];
+		if (tmp == 'q' || tmp == 'w' || tmp == 'e' || tmp == 'r' || tmp == 't' || tmp == 'y' || tmp == 'u' || tmp == 'i' || tmp == 'o' || tmp == 'p' 
+			|| tmp == 'Q' || tmp == 'W' || tmp == 'E' || tmp == 'R' || tmp == 'T' || tmp == 'Y' || tmp == 'U' || tmp == 'I' || tmp == 'O' || tmp == 'P') return test(s, "qwertyuiopQWERTYUIOP");
+		if (tmp == 'a' || tmp == 's' || tmp == 'd' || tmp == 'f' || tmp == 'g' || tmp == 'h' || tmp == 'j' || tmp == 'k' || tmp == 'l'
+			|| tmp == 'A' || tmp == 'S' || tmp == 'D' || tmp == 'F' || tmp == 'G' || tmp == 'H' || tmp == 'J' || tmp == 'K' || tmp == 'L') return test(s, "asdfghjklASDFGHJKL");
+		if (tmp == 'z' || tmp == 'x' || tmp == 'c' || tmp == 'v' || tmp == 'b' || tmp == 'n' || tmp == 'm'
+			|| tmp == 'Z' || tmp == 'X' || tmp == 'C' || tmp == 'V' || tmp == 'B' || tmp == 'N' || tmp == 'M') return test(s, "zxcvbnmZXCVBNM");
+	}
+	bool test(string s1, string s2){
+		int cnt = 0;
+		for (int i = 0; i < s1.length(); ++i){
+			for (int j = 0; j < s2.length(); ++j){
+				if (s1[i] == s2[j]) cnt = cnt + 1;
+			}
+			if (cnt == 0) return false;
+			cnt = 0;
+		}
+		return true;
+	}
+};
