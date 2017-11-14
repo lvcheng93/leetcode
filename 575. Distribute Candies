@@ -1,0 +1,32 @@
+class Solution {
+public:
+	int distributeCandies(vector<int>& candies) {
+		quicksort(candies, 0, candies.size()-1);
+		vector<int> diff;
+		diff.push_back(candies[0]);
+		for (int i : candies){
+			if (i != diff[diff.size() - 1]) diff.push_back(i);
+		}
+		return diff.size() < (candies.size() / 2) ? diff.size() : (candies.size() / 2);
+	}
+	void quicksort(vector<int>& v, int left, int right){
+		if (left < right){
+			int i = left - 1, j = left, tmp;
+			while (j != right){
+				if (v[j] < v[right]){
+					i = i + 1;
+					tmp = v[i];
+					v[i] = v[j];
+					v[j] = tmp;
+					j = j + 1;
+				}
+				else j = j + 1;
+			}
+			tmp = v[i + 1];
+			v[i + 1] = v[right];
+			v[right] = tmp;
+			quicksort(v, left, i);
+			quicksort(v, i + 2, right);
+		}
+	}
+};
