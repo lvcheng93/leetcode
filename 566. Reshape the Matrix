@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<vector<int>> matrixReshape(vector<vector<int>>& nums, int r, int c) {
+        if(nums.size() * nums[0].size() != r * c){
+            return nums;
+        }
+        else{
+            vector<int> tmp;
+            vector<vector<int> > result;
+            for(int i = 0;i < nums.size();++i){
+                for(int j = 0;j < nums[0].size();++j){
+                    tmp.insert(tmp.begin(), nums[i][j]);
+                }
+            }
+            for(int i = 0;i < r;++i){
+                vector<int> part;
+                for(int j = 0;j < c;++j){
+                    part.push_back(tmp[tmp.size()-1]);
+                    tmp.pop_back();
+                }
+                result.push_back(part);
+            }
+            return result;
+        }
+    }
+};
