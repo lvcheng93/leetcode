@@ -1,0 +1,45 @@
+class Solution {
+public:
+	int calPoints(vector<string>& ops) {
+		int result = 0;
+		vector<int> valid;//save the site of valid round's points
+		for (int i = 0; i < ops.size(); ++i){
+			if (ops[i] == "+"){
+				int f2, f1, a, b;
+				f1 = valid[valid.size() - 1];
+				f2 = valid[valid.size() - 2];
+				stringstream aa(ops[f1]), bb(ops[f2]);
+				aa >> a;
+				bb >> b;
+				ops[i] = to_string(a + b);
+				valid.push_back(i);
+			}
+			else if (ops[i] == "D"){
+				int f1, a;
+				f1 = valid[valid.size() - 1];
+				stringstream aa(ops[f1]);
+				aa >> a;
+				ops[i] = to_string(a * 2);
+				valid.push_back(i);
+			}
+			else if (ops[i] == "C"){
+				int f1, a;
+				f1 = valid[valid.size() - 1];
+				stringstream aa(ops[f1]);
+				aa >> a;
+				ops[i] = to_string(-a);
+				valid.pop_back();
+			}
+			else{
+				valid.push_back(i);
+			}
+		}
+		for (int j = 0; j < ops.size(); ++j){
+			int tmp;
+			stringstream t(ops[j]);
+			t >> tmp;
+			result = result + tmp;
+		}
+		return result;
+	}
+};
