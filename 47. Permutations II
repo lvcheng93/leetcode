@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vector<int>> result;
+        vector<vector<int>>::iterator tmp;
+        permu(nums, 0, result);
+        sort(result.begin(), result.end());
+        tmp = unique(result.begin(), result.end());
+        result.resize(distance(result.begin(), tmp));
+        return result;
+    }
+    void permu(vector<int> &nums, int flag, vector<vector<int>> &result){
+        if(flag == nums.size()){
+            result.push_back(nums);
+            return;
+        }
+        else{
+            for(int i = flag;i < nums.size();++i){
+                swap(nums[i], nums[flag]);
+                permu(nums, flag + 1, result);
+                swap(nums[i], nums[flag]);
+            }
+        }
+    }
+};
