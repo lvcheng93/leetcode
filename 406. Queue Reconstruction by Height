@@ -1,0 +1,28 @@
+class Solution {
+public:
+    vector<pair<int, int>> reconstructQueue(vector<pair<int, int>>& people) {
+        if(!people.empty()){
+            auto cmp = [](const pair<int, int> &a, const pair<int, int> &b){return (a.second < b.second);};
+            sort(people.begin(), people.end(), cmp);
+            vector<pair<int, int>> result;
+            result.push_back(people[0]);
+            pair<int, int> p;
+            for(int i = 1;i < people.size();++i){
+                int flag = 0, num = people[i].second;
+                while(num > 0 && flag < result.size()){
+                    if(result[flag].first >= people[i].first) --num;
+                    ++flag;
+                }
+                while(flag < result.size()){
+                    if(result[flag].first >= people[i].first){
+                        break;
+                    }
+                    else ++flag;
+                }
+                result.insert(result.begin()+flag, people[i]);
+            }
+            return result;
+        }
+        else return people;
+    }
+};
