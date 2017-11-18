@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int countSubstrings(string s) {
+        vector<string> v;
+        int n = 0;
+        for(int begin = 0;begin < s.length();++begin){
+            for(int len = 1;len <= s.length()-begin;++len){
+                string str = s.substr(begin, len);
+                int cnt = 0;
+                for(int i = 0;i < str.length()/2;++i){
+                    if(str[i] != str[str.length()-1-i]){
+                        ++cnt;
+                        break;
+                    }
+                }
+                if(cnt == 0) ++n;
+            }
+        }
+        return n;
+    }
+};
