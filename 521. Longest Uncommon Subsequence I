@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int findLUSlength(string a, string b) {
+        if(a.length() == b.length()){
+            vector<int> tmp;
+            for(int abegin = 0;abegin < a.length();++abegin){
+                int len = 1;
+                for(len = 1;len <= a.length()-abegin;++len){
+                    int bbegin = 0;
+                    int same = 0;
+                    for(bbegin = 0;bbegin < b.length();++bbegin){
+                        if((bbegin + len) <= b.length()){
+                            if(a.substr(abegin, len).compare(b.substr(bbegin, len)) == 0) ++same;
+                        }
+                    }
+                    if(same == 0) tmp.push_back(len);
+                }
+            }
+            if (!tmp.empty()) {
+                sort(tmp.begin(), tmp.end());
+                return tmp[tmp.size()-1];
+            }
+            else return -1;
+        }
+        else return a.length() > b.length() ? a.length() : b.length();
+    }
+};
