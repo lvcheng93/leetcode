@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int numberOfArithmeticSlices(vector<int>& A) {
+        int result = 0;
+        for(int len = 3;len <= A.size();++len){
+            for(int begin = 0;begin + len <= A.size();++begin){
+                int cnt = 0, diff = A[begin+1] - A[begin];
+                for(int i = begin;i < begin + len -1;++i){
+                    if(A[i+1] - A[i] != diff){
+                        ++cnt;
+                        break;
+                    }
+                }
+                if(cnt == 0) ++result;
+            }
+        }
+        return result;
+    }
+};
