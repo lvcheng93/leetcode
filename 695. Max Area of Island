@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int maxAreaOfIsland(vector<vector<int>>& grid) {
+        vector<int> v;
+        for(int i = 0;i < grid.size();++i){
+            for(int j = 0;j < grid[0].size();++j){
+                int area = 0; 
+                if(grid[i][j] == 1){
+                    ++area;
+                    grid[i][j] = 0;
+                    surround(grid, i, j, area);
+                }
+                if(area != 0) v.push_back(area);
+            }
+        }
+        if(v.size() == 0) return 0;
+        else{
+            auto comp = [](const int& left, const int& right){return left > right;};
+            sort(v.begin(), v.end(), comp);
+            return v[0];
+        }
+    }
+    void surround(vector<vector<int>>& grid, int i, int j, int& area){
+        if(i != 0 && grid[i-1][j] == 1){
+            ++area;
+            grid[i-1][j] = 0;
+            surround(grid, i-1, j, area);
+        }
+        if(i != grid.size()-1 && grid[i+1][j] == 1){
+            ++area;
+            grid[i+1][j] = 0;
+            surround(grid, i+1, j, area);
+        }
+        if(j != 0 && grid[i][j-1] == 1){
+            ++area;
+            grid[i][j-1] = 0;
+            surround(grid, i, j-1, area);
+        }
+        if(j != grid[0].size()-1 && grid[i][j+1] == 1){
+            ++area;
+            grid[i][j+1] = 0;
+            surround(grid, i, j+1, area);
+        }
+    }
+};
