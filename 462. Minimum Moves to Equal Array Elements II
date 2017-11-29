@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int minMoves2(vector<int>& nums) {
+        vector<long int> v;
+        for(int i = 0;i < nums.size();++i){
+            long int cnt = 0;
+            for(int j = 0;j < nums.size();++j){
+                cnt = cnt + abs(nums[i] - nums[j]);
+            }
+            v.push_back(cnt);
+        }
+        sort(v.begin(), v.end());
+        return (int)v[0];
+    }
+};
