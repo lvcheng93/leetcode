@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int countBinarySubstrings(string s) {
+        vector<char> ss;
+        ss.push_back(s[0]);
+        int flag = 0, num = 0;
+        for(int i = 1;i < s.length();++i){
+            ss.push_back(s[i]);
+            if(ss[ss.size()-1] != ss[ss.size()-2]){
+                if(ss[ss.size()-1] == ss[0]){
+                    num = num + ((ss.size() - 1 - flag) > flag ? flag : (ss.size() - 1 - flag));
+                    int tmp = ss.size() - 1;
+                    ss.erase(ss.begin(), ss.begin() + flag);
+                    flag = tmp - flag;
+                }
+                else flag = ss.size()-1;
+            }
+        }
+        num = num + ((ss.size() - flag) > flag ? flag : (ss.size() - flag));
+        return num;
+    }
+};
